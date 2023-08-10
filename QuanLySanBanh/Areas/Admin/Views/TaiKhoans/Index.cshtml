@@ -1,0 +1,182 @@
+﻿@model IEnumerable<QuanLySanBanh.Models.TaiKhoan>
+
+
+    @{
+    ViewBag.Title = "DanhSachSan";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "MaTK", rowsPerPage: 3);
+    @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
+    }
+    <link href="~/Content/Pagecss/sanListAdmin.css" rel="stylesheet" type="text/css" />
+    <style>
+
+        p {
+            float: left !important;
+            display: inline-block;
+        }
+
+        #search-form {
+            float: left !important;
+            display: inline-block;
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+            margin-left: 9px;
+        }
+
+
+            #search-form input {
+                text-align: center;
+                background-color: #222831;
+                border: 1px solid white;
+                border-radius: 3px;
+                color: white;
+                margin-left: 10px;
+                margin-right: 20px;
+            }
+
+        #MaSan {
+            display: inline-block;
+            background-color: #222831;
+            color: white;
+            border-radius: 3px;
+            border: 1px solid white;
+            width: 260px;
+            margin-left: 10px;
+            margin-right: 20px;
+        }
+
+        #gio {
+            width: 140px;
+        }
+
+        #maTK {
+            width: 100px;
+        }
+
+        #reset {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+
+        #radio {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+            #radio input {
+                width: 15px;
+                height: 15px;
+                margin-left: 10px;
+                margin-right: 10px;
+                font-size: 0px;
+            }
+
+        #chia {
+            margin-left: 100px;
+        }
+        table{
+            font-size: 15px !important;
+        }
+    </style>
+    <div id="san-list" class="widget-next-match">
+        <div class="widget-title">
+            <h3>Danh Sách Tài Khoản</h3>
+        </div>
+        <div class="widget-body mb-3">
+            <div class="text-center widget-vs-contents mb-4">
+
+                <p>
+                    <a href="~/Admin/TaiKhoans/Create" class="btn btn-primary py-3 px-4 mr-3"><i style="margin-right: 10px;" class="fas fa-futbol"></i>Thêm Tài Khoản Mới</a>
+                </p>
+                @using (Html.BeginForm("Index", "TaiKhoans", FormMethod.Get))
+
+            {
+                @Html.AntiForgeryToken()
+                <div id="search-form">
+                    <div>
+                        <span>Mã tài khoản </span>
+                        <input id="maTK" type="text" name="maTK" value="@ViewBag.maTK" />
+                        <span>Tên tài khoản </span>
+                        <input id="gio" type="text" name="tenTK" value="@ViewBag.tenTK" />
+                        <span>Số điện thoại </span>
+                        <input id="gio" type="number" name="sdt" value="@ViewBag.sdt" />
+                    </div>
+                    <div id="radio">
+                        <span>Thành viên </span>
+
+                        @if (@ViewBag.vip == null)
+                        {
+                        <input type="radio" name="vip" value="1" /><text>VIP</text>
+                        <input type="radio" name="vip" value="0" /><text>Thường</text>
+                        }
+                        else if (@ViewBag.vip == "1")
+                        {
+                        <input type="radio" name="vip" checked value="1" /><text>VIP</text>
+                        <input type="radio" name="vip" value="0" /><text>Thường</text>
+                        }
+                        else
+                        {
+                        <input type="radio" name="vip" value="1" /><text>VIP</text>
+                        <input type="radio" name="vip" checked value="0" /><text>Thường</text>
+                        }
+
+                        <span id="chia">Loại tài khoản </span>
+                        @if (@ViewBag.quyen == null)
+                        {
+                        <input type="radio" name="quyen" value="1" /><text>Admin</text>
+                        <input type="radio" name="quyen" value="0" /><text>Khách hàng</text>
+                        }
+                        else if (@ViewBag.quyen == "1")
+                        {
+                        <input type="radio" name="quyen" checked value="1" /><text>Admin</text>
+                        <input type="radio" name="quyen" value="0" /><text>Khách hàng</text>
+                        }
+                        else
+                        {
+                        <input type="radio" name="quyen" value="1" /><text>Admin</text>
+                        <input type="radio" name="quyen" checked value="0" /><text>Khách hàng</text>
+                        }
+                    </div>
+                </div>
+                <a href="~/Admin/TaiKhoans/Index" id="reset"><abbr title="Làm mới"><i class="fas fa-sync-alt"></i></abbr></a>
+                <input class="btn btn-success py-3 px-2 " type="submit" name="submit" value="Tìm tài khoản" style="margin-left: 5px;width:120px;
+                        color:white" />
+            }
+            </div>
+
+            @grid.GetHtml(
+                         tableStyle: "table table-bordered table-hover",
+                         footerStyle: "grid-footer",
+                         fillEmptyRows: true,
+                         mode: WebGridPagerModes.Numeric,
+                         alternatingRowStyle: "alternatingRowStyle",
+                         columns: new[]  // colums in grid
+                         {
+            grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+            grid.Column("MaTK","Mã tài khoản"),
+            grid.Column("TenTK","Tên tài khoản"),
+            grid.Column("Email","Email"),
+            grid.Column("HoTen","Họ Tên"),
+            grid.Column("DiaChi","Địa chỉ"),
+            grid.Column("SDT","Số điện thoại"),
+            grid.Column("Vip","Thành viên",format: (@item) => @item.Vip==true?"VIP":"Thường"),
+            grid.Column("DiemTich","Điểm tích"),
+            grid.Column("Quyen","Loại tài khoản",format: (@item) => @item.Quyen==true?"Admin":"Khách hàng"),
+            /*grid.Column(format: (item) => Html.ActionLink("Cập nhật", "Edit", "Sans",new { id = item.MaSan },"SansController")),
+            grid.Column(format: (item) => Html.ActionLink("Xem chi tiết", "Details","Sans", new { id = item.MaSan },"SansController")),
+            grid.Column(format: (item) => Html.ActionLink("Xóa", "Delete","Sans", new { id = item.MaSan },"SansController")),*/
+            grid.Column("Chức năng", format: @<text>
+                <a href="@Url.Action("Edit",
+                        new { id = item.MaTK} )" class="btn btn-outline-warning"><abbr title="Cập nhật dữ liệu"><i class="fas fa-edit"></i></abbr></a>
+                <a href="@Url.Action("Details",
+                        new { id = item.MaTK} )" class="btn btn-outline-info"><abbr title="Xem chi tiết"><i class="fas fa-list-alt"></i></abbr></a>
+                <a href="@Url.Action("Delete",
+                        new { id = item.MaTK})" class="btn btn-outline-danger"><abbr title="Xóa dữ liệu"><i class="fas fa-trash-alt"></i></abbr></a>
+            </text>),
+
+   }
+   )
+            <h5 style="text-align: center; color: #ee1e46; font-size: 50px;">@ViewBag.TB</h5>
+        </div>
+    </div>

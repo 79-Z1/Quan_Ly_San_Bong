@@ -1,0 +1,126 @@
+﻿@model IEnumerable<QuanLySanBanh.Models.DatSan>
+
+    @{
+    ViewBag.Title = "DanhSachSan";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "MaDS", rowsPerPage: 6 );
+    @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
+    }
+    <link href="~/Content/Pagecss/sanListAdmin.css" rel="stylesheet" type="text/css" />
+    <style>
+
+        p {
+            float: left !important;
+            display: inline-block;
+        }
+
+        #search-form {
+            float: left !important;
+            display: inline-block;
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+
+            #search-form input {
+                text-align: center;
+                background-color: #222831;
+                border: 1px solid white;
+                border-radius: 3px;
+                color: white;
+                margin-left: 10px;
+                margin-right: 20px;
+            }
+
+        #MaTK {
+            display: inline-block;
+            background-color: #222831;
+            color: white;
+            border-radius: 3px;
+            border: 1px solid white;
+            width: 149px;
+            margin-left: 10px;
+            margin-right: 20px;
+        }
+
+        #gio {
+            width: 40px;
+        }
+
+        #maTK {
+            width: 100px;
+        }
+
+        #reset {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+    </style>
+    <div id="san-list" class="widget-next-match">
+        <div class="widget-title">
+            <h3>Danh Sách Đặt Sân</h3>
+        </div>
+        <div class="widget-body mb-3">
+            <div class="text-center widget-vs-contents mb-4">
+
+                <p>
+                    <a href="~/Admin/DatSans/Create" class="btn btn-primary py-3 px-4 mr-3"><i style="margin-right: 10px;" class="fas fa-futbol"></i>Thêm Đặt Sân Mới</a>
+                </p>
+                @using (Html.BeginForm("Index", "DatSans", FormMethod.Get))
+
+            {
+                @Html.AntiForgeryToken()
+                <div id="search-form">
+                    <span>Tên tài khoản </span>
+                    @Html.DropDownList("MaTK", null, "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    <span>Giờ từ </span>
+                    <input id="gio" type="number" name="gioBatDau" value="@ViewBag.gioBatDau" />
+                    <span>đến </span>
+                    <input id="gio" type="number" name="gioKetThuc" value="@ViewBag.gioKetThuc" />
+                    <span>Ngày đến sân </span>
+                    <input type="date" name="ngay" value="@ViewBag.ngay" style="color-scheme: dark;" />
+                    <a href="~/Admin/DatSans/Index" id="reset"><abbr title="Làm mới"><i class="fas fa-sync-alt"></i></abbr></a>
+                </div>
+                <input class="btn btn-success py-3 px-2 mr-3" type="submit" name="submit" value="Tìm đặt sân" style="width:100px;
+                color:white" />
+            }
+
+            </div>
+
+            @grid.GetHtml(
+            tableStyle: "table table-bordered table-hover",
+            footerStyle: "grid-footer",
+            fillEmptyRows: true,
+            mode: WebGridPagerModes.Numeric,
+            alternatingRowStyle: "alternatingRowStyle",
+            columns: new[]  // colums in grid
+            {
+            grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+            grid.Column("MaDS","Mã đặt sân"),
+            grid.Column("MaCTS","Mã chi tiết sân"),
+            grid.Column("TaiKhoan.TenTK","Tên tài khoản"),
+            grid.Column("NgayDenSan","Ngày đến sân",format:@<text> @Convert.ToDateTime(item.NgayDenSan).ToString("dd/MM/yyyy")</text>),
+grid.Column("GioBatDau","Giờ bắt đầu"),
+grid.Column("GioKetThuc","Giờ kết thúc"),
+            @*grid.Column("San.TenSan","Tên sân"),//the model fields to display*@
+
+/*grid.Column(format: (item) => Html.ActionLink("Cập nhật", "Edit", "Sans",new { id = item.MaSan },"SansController")),
+grid.Column(format: (item) => Html.ActionLink("Xem chi tiết", "Details","Sans", new { id = item.MaSan },"SansController")),
+grid.Column(format: (item) => Html.ActionLink("Xóa", "Delete","Sans", new { id = item.MaSan },"SansController")),*/
+grid.Column("Chức năng", format: @<text>
+                <a href="@Url.Action("Edit",
+                        new { id = item.MaDS} )" class="btn btn-outline-warning"><abbr title="Cập nhật dữ liệu"><i class="fas fa-edit"></i></abbr></a>
+                <a href="@Url.Action("Details",
+                        new { id = item.MaDS} )" class="btn btn-outline-info"><abbr title="Xem chi tiết"><i class="fas fa-list-alt"></i></abbr></a>
+                <a href="@Url.Action("Delete",
+                        new { id = item.MaDS})" class="btn btn-outline-danger"><abbr title="Xóa dữ liệu"><i class="fas fa-trash-alt"></i></abbr></a>
+</text>),
+
+}
+)
+            <h5 style="text-align: center; color: #ee1e46; font-size: 50px;">@ViewBag.TB</h5>
+        </div>
+    </div>
+

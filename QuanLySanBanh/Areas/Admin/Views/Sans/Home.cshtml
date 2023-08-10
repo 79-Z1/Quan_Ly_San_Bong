@@ -1,0 +1,125 @@
+﻿
+@{
+    Layout = "~/Views/Shared/LayoutAdmin2.cshtml";
+}
+<link href="~/Content/Pagecss/sanListAdmin.css" rel="stylesheet" type="text/css" />
+<style>
+    #top {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 50px;
+    }
+    #bot {
+        display: flex;
+        justify-content: space-around;
+    }
+    .button-link {
+        height: 215px;
+        width: 355px;
+    }
+    .btn.button-1:hover {
+        border-color: #05b033;
+        background: transparent;
+        color: #05b033;
+    }
+    .btn.button-2:hover {
+        border-color: #0588a6;
+        background: transparent;
+        color: #0588a6;
+    }
+    .btn.button-3:hover {
+        border-color: #d49008;
+        background: transparent;
+        color: #d49008;
+    }
+    .btn.button-4:hover {
+        border-color: #285aed;
+        background: transparent;
+        color: #285aed;
+    }
+    .btn.button-5:hover {
+        border-color: #d42a08;
+        background: transparent;
+        color: #d42a08;
+    }
+    .btn.button-6:hover {
+        border-color: #7c8a91;
+        background: transparent;
+        color: #7c8a91;
+    }
+    p{
+        font-size: x-large;
+    }
+    i {
+        font-size: xx-large;
+        margin: 25px 0;
+    }
+    .button-1 {
+        color: #fff;
+        background-color: #05b033;
+        border-color: #05b033;
+    }
+    .button-2 {
+        color: #fff;
+        background-color: #0588a6;
+        border-color: #0588a6;
+    }
+    .button-3 {
+        color: #fff;
+        background-color: #d49008;
+        border-color: #d49008;
+    }
+    .button-4 {
+        color: #fff;
+        background-color: #285aed;
+        border-color: #285aed;
+    }
+    .button-5 {
+        color: #fff;
+        background-color: #d42a08;
+        border-color: #d42a08;
+    }
+    .button-6 {
+        color: #fff;
+        background-color: #7c8a91;
+        border-color: #7c8a91;
+    }
+
+</style>
+<div style="border: 2px solid grey; height: 595px !important;" class="widget-next-match">
+    <div class="widget-title">
+        <h3>Hệ Thống Quản Lý Sân Bóng Mini Nhân Tạo Nha Trang</h3>
+    </div>
+    <div class="widget-body mb-3">
+        <div id="top">
+                <a href="~/Admin/Sans/Index" class="btn button-1 py-3 px-4 mr-3 button-link">
+                    <i style="" class="fas fa-futbol"></i>
+                    <p>Quản Lý Sân Bóng Lớn</p>
+                </a>
+                <a href="~/Admin/ChiTietSans/Index" class="btn button-2 py-3 px-4 mr-3 button-link">
+                    <i style="" class="fas fa-futbol"></i>
+                    <i style="" class="fas fa-futbol"></i>
+                    <i style="" class="fas fa-futbol"></i>
+                    <p>Quản Lý Sân Bóng Con</p>
+                </a>
+                <a href="~/Admin/BangGiaSans/Index" class="btn button-3 py-3 px-4 mr-3 button-link">
+                    <i style="" class="fas fa-dollar-sign"></i>
+                    <p>Quản Lý Bảng Giá Sân</p>
+                </a>
+        </div>
+        <div id="bot">
+                <a href="~/Admin/DatSans/Index" class="btn button-4 py-3 px-4 mr-3 button-link">
+                    <i style="" class="fas fa-clipboard-list"></i>
+                    <p>Quản Lý Đặt Sân</p>
+                </a>
+                <a href="~/Admin/TaiKhoans/Index" class="btn button-5 py-3 px-4 mr-3 button-link">
+                    <i style="" class="fas fa-users"></i>
+                    <p>Quản Lý Tài Khoản</p>
+                </a>
+                <a href="~/Admin/DatSans/BaoCaoThongKe" class="btn button-6 py-3 px-4 mr-3 button-link">
+                    <i style="" class="fa fa-line-chart"></i>
+                    <p>Báo cáo doanh thu</p>
+                </a>
+        </div>
+    </div>
+</div>

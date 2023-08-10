@@ -1,0 +1,99 @@
+﻿@model IEnumerable<QuanLySanBanh.Models.San>
+
+    @{
+    ViewBag.Title = "DanhSachSan";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenSan", rowsPerPage: 5);
+    }
+    <link href="~/Content/Pagecss/sanListAdmin.css" rel="stylesheet" type="text/css" />
+    <style>
+
+        p {
+            float: left !important;
+            display: inline-block;
+        }
+
+        #search-form {
+            float: left !important;
+            display: inline-block;
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+            margin-left: 220px;
+        }
+
+            #search-form input {
+                text-align: center;
+                background-color: #222831;
+                border: 1px solid white;
+                border-radius: 3px;
+                color: white;
+                margin-left: 20px;
+                margin-right: 30px;
+            }
+
+        #reset {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+    </style>
+    <div id="san-list" class="widget-next-match">
+        <div class="widget-title">
+            <h3>Danh Sách Sân Bóng</h3>
+        </div>
+        <div class="widget-body mb-3">
+            <div class="text-center widget-vs-contents mb-4">
+                <p>
+                    <a href="~/Admin/Sans/Create" class="btn btn-primary py-3 px-4 mr-3"><i style="margin-right: 10px;" class="fas fa-futbol"></i>Thêm Sân Mới</a>
+
+                </p>
+                @using (Html.BeginForm("Index", "Sans", FormMethod.Get))
+
+            {
+                @Html.AntiForgeryToken()
+                <div id="search-form">
+                    <span>Mã sân </span>
+                    <input type="text" name="maSan" value="@ViewBag.maSan" />
+                    <span>Tên sân </span>
+                    <input type="text" name="tenSan" value="@ViewBag.tenSan" />
+                    <a href="~/Admin/Sans/Index" id="reset"><abbr title="Làm mới"><i class="fas fa-sync-alt"></i></abbr></a>
+                </div>
+                <input class="btn btn-success py-3 px-4 mr-3" type="submit" name="submit" value="Tìm sân" style="margin-left: 5px;width:100px;
+                color:white" />
+            }
+
+
+            </div>
+
+            @grid.GetHtml(
+                tableStyle: "table table-bordered table-hover",
+                footerStyle: "grid-footer",
+                fillEmptyRows: true,
+                mode: WebGridPagerModes.Numeric,
+                alternatingRowStyle: "alternatingRowStyle",
+                  columns: new[]  // colums in grid
+                 {
+             grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+            grid.Column("MaSan","Mã sân"), //the model fields to display
+            grid.Column("TenSan","Tên sân"),
+    grid.Column("AnhSan","Ảnh sân",format: @<img class="anh-san" src="~/Images/@item.AnhSan" />),
+grid.Column("DiaChi","Địa chỉ"),
+grid.Column("SoLuongSan","Số lượng sân"),
+/*grid.Column(format: (item) => Html.ActionLink("Cập nhật", "Edit", "Sans",new { id = item.MaSan },"SansController")),
+grid.Column(format: (item) => Html.ActionLink("Xem chi tiết", "Details","Sans", new { id = item.MaSan },"SansController")),
+grid.Column(format: (item) => Html.ActionLink("Xóa", "Delete","Sans", new { id = item.MaSan },"SansController")),*/
+grid.Column("Chức năng", format: @<text>
+                <a href="@Url.Action("Edit",
+                        new { id = item.MaSan})" class="btn btn-outline-warning"><abbr title="Cập nhật dữ liệu"><i class="fas fa-edit"></i></abbr></a>
+                <a href="@Url.Action("Details",
+                        new { id = item.MaSan})" class="btn btn-outline-info"><abbr title="Xem chi tiết"><i class="fas fa-list-alt"></i></abbr></a>
+                <a href="@Url.Action("Delete",
+                        new { id = item.MaSan})" class="btn btn-outline-danger"><abbr title="Xóa dữ liệu"><i class="fas fa-trash-alt"></i></abbr></a>
+</text>),
+
+}
+)
+            <h5 style="text-align: center; color: #ee1e46; padding-top: 55px; font-size: 50px;">@ViewBag.TB</h5>
+
+        </div>
+    </div>

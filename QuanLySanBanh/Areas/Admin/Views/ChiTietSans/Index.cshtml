@@ -1,0 +1,114 @@
+﻿@model IEnumerable<QuanLySanBanh.Models.ChiTietSan>
+
+    @{
+    ViewBag.Title = "DanhSachSan";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "MaCTS", rowsPerPage: 6);
+    @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
+    }
+    <link href="~/Content/Pagecss/sanListAdmin.css" rel="stylesheet" type="text/css" />
+    <style>
+
+        p {
+            float: left !important;
+            display: inline-block;
+        }
+
+        #search-form {
+            float: left !important;
+            display: inline-block;
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+            margin-left: 100px;
+        }
+
+            #search-form input {
+                text-align: center;
+                background-color: #222831;
+                border: 1px solid white;
+                border-radius: 3px;
+                color: white;
+                margin-left: 20px;
+                margin-right: 30px;
+            }
+
+        #MaSan {
+            display: inline-block;
+            background-color: #222831;
+            color: white;
+            border-radius: 3px;
+            border: 1px solid white;
+            width: 260px;
+            margin-left: 20px;
+            margin-right: 30px;
+        }
+
+        #gio {
+            width: 40px;
+        }
+
+        #gia {
+            width: 100px;
+        }
+
+        #reset {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+    </style>
+    <div id="san-list" class="widget-next-match">
+        <div class="widget-title">
+            <h3>Danh Sách Chi Tiết Sân</h3>
+        </div>
+        <div class="widget-body mb-3">
+            <div class="text-center widget-vs-contents mb-4">
+
+                <p>
+                    <a href="~/Admin/ChiTietSans/Create" class="btn btn-primary py-3 px-4 mr-3"><i style="margin-right: 10px;" class="fas fa-futbol"></i>Thêm Chi Tiết Sân Mới</a>
+                </p>
+                @using (Html.BeginForm("Index", "ChiTietSans", FormMethod.Get))
+
+            {
+                @Html.AntiForgeryToken()
+                <div id="search-form">
+                    <span>Tên sân</span>
+                    @Html.DropDownList("MaSan", null, "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    <span>Vị Trí </span>
+                    <input type="text" name="viTri" value="@ViewBag.viTri" />
+                    <a href="~/Admin/ChiTietSans/Index" id="reset"><abbr title="Làm mới"><i class="fas fa-sync-alt"></i></abbr></a>
+                </div>
+                <input class="btn btn-success py-3 px-2 mr-3" type="submit" name="submit" value="Tìm chi tiết sân" style="margin-left: 5px;width:130px;
+                color:white" />
+            }
+            </div>
+
+            @grid.GetHtml(
+                tableStyle: "table table-bordered table-hover",
+                footerStyle: "grid-footer",
+                fillEmptyRows: true,
+                mode: WebGridPagerModes.Numeric,
+                alternatingRowStyle: "alternatingRowStyle",
+                  columns: new[]  // colums in grid
+                 {
+             grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+            grid.Column("MaCTS","Mã chi tiết sân"),
+            grid.Column("San.TenSan","Tên sân"),//the model fields to display
+            grid.Column("SoSan","Vị trí sân"),
+    /*grid.Column(format: (item) => Html.ActionLink("Cập nhật", "Edit", "Sans",new { id = item.MaSan },"SansController")),
+    grid.Column(format: (item) => Html.ActionLink("Xem chi tiết", "Details","Sans", new { id = item.MaSan },"SansController")),
+    grid.Column(format: (item) => Html.ActionLink("Xóa", "Delete","Sans", new { id = item.MaSan },"SansController")),*/
+    grid.Column("Chức năng", format: @<text>
+                <a href="@Url.Action("Edit",
+                        new { id = item.MaCTS})" class="btn btn-outline-warning"><abbr title="Cập nhật dữ liệu"><i class="fas fa-edit"></i></abbr></a>
+                <a href="@Url.Action("Details",
+                        new { id = item.MaCTS})" class="btn btn-outline-info"><abbr title="Xem chi tiết"><i class="fas fa-list-alt"></i></abbr></a>
+                <a href="@Url.Action("Delete",
+                        new { id = item.MaCTS})" class="btn btn-outline-danger"><abbr title="Xóa dữ liệu"><i class="fas fa-trash-alt"></i></abbr></a>
+    </text>),
+
+}
+)
+            <h5 style="text-align: center; color: #ee1e46; font-size: 50px;">@ViewBag.TB</h5>
+        </div>
+    </div>

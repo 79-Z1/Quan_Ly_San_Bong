@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "DanhSachSan";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "Gio", rowsPerPage: 6);
+    @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
+}
+<link href="~/Content/Pagecss/sanListAdmin.css" rel="stylesheet" type="text/css" />
+@*<style>
+</style>
+<div id="san-list" class="widget-next-match">
+    <div class="widget-title">
+        <h3>Danh Sách Bảng Giá Sân</h3>
+    </div>
+    <div class="widget-body mb-3">
+        @grid.GetHtml(
+        tableStyle: "table table-bordered table-hover",
+        footerStyle: "grid-footer",
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.Numeric,
+        alternatingRowStyle: "alternatingRowStyle",
+          columns: new[]  // colums in grid
+         {
+            grid.Column("Gio","Giờ"),
+            grid.Column("GiaTheoGio","Giá Theo Giờ",format:@<text> @item.GiaTheoGio.ToString("#,##0") vnđ  </text>),
+}
+)
+        <h5 style="text-align: center; color: #ee1e46; font-size: 50px;">@ViewBag.TB</h5>
+
+    </div>
+</div>*@
+
+
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 600px; text-align: center;">
+        <h3>Danh Sách Bảng Giá Sân</h3>
+    </div>
+    <div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 600px;">
+        @grid.GetHtml(
+        tableStyle: "table table-bordered table-hover",
+        footerStyle: "grid-footer",
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.Numeric,
+        alternatingRowStyle: "alternatingRowStyle",
+          columns: new[]  // colums in grid
+         {
+            grid.Column("Gio","Giờ"),
+            grid.Column("GiaTheoGio","Giá Theo Giờ",format:@<text> @item.GiaTheoGio.ToString("#,##0") vnđ  </text>),
+}
+)
+    </div>
+</div>

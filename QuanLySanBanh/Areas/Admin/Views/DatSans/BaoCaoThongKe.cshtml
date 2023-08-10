@@ -1,0 +1,101 @@
+﻿@using System.Data;
+@{
+    ViewBag.Title = "BaoCaoThongKe";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    var rows = (ViewBag.Rows as DataTable)?.AsEnumerable().Select(row => new { TenSan = row["TenSan"], SoLuotDatSan = row["SoLuotDatSan"], DoanhThu = row["DoanhThu"] });
+    var grid = new WebGrid(rows, canPage: true, defaultSort: "TenSan", rowsPerPage: 9);
+    if (rows != null)
+    {
+        grid = new WebGrid(rows, canPage: true, defaultSort: "TenSan", rowsPerPage: 9);
+    }
+}
+
+<link href="~/Content/Pagecss/sanListAdmin.css" rel="stylesheet" type="text/css" />
+<style>
+
+    p {
+        float: left !important;
+        display: inline-block;
+    }
+
+    #search-form {
+        float: left !important;
+        display: inline-block;
+        font-size: 20px;
+        margin-top: 10px;
+        font-weight: bold;
+        margin-left: 100px;
+    }
+
+        #search-form input {
+            text-align: center;
+            background-color: #222831;
+            border: 1px solid white;
+            border-radius: 3px;
+            color: white;
+            margin-left: 20px;
+            margin-right: 30px;
+        }
+
+    #reset {
+        font-size: 20px;
+        margin-right: 5px;
+    }
+    h5 {
+        color: #ee1e46;
+        font-size: 25px;
+        width: 274px;
+        height: 50px;
+        text-align: center;
+        border: 1px solid gray;
+        border-top: 0;
+        padding-top: 8px;
+    }
+</style>
+<div id="san-list" class="widget-next-match" style="    height: 100% !important;">
+    <div class="widget-title">
+        <h3 style="font-size: 30px; text-align: center;">Báo cáo doanh thu</h3>
+    </div>
+    <div class="widget-body mb-3">
+        <div class="text-center widget-vs-contents mb-4" style="display: flex; justify-content: end;">
+            @using (Html.BeginForm("BaoCaoThongKe", "DatSans", FormMethod.Get))
+            {
+            @Html.AntiForgeryToken()
+            <div id="search-form">
+                <span>Tháng</span>
+                <input type="number" name="Thang" value="@ViewBag.thang" maxlength="2" min="1" max="12" />
+                <a href="~/Admin/DatSans/BaoCaoThongKe" id="reset"><abbr title="Làm mới"><i class="fas fa-sync-alt"></i></abbr></a>
+            </div>
+            <input class="btn btn-success py-3 px-2 mr-3" type="submit" name="submit" value="Báo cáo" style="margin-left: 5px;width:130px;
+                color:white" />
+            }
+        </div>
+        @grid.GetHtml(
+                         tableStyle: "table table-bordered table-hover m-0",
+                         footerStyle: "grid-footer",
+                         fillEmptyRows: true,
+                         mode: WebGridPagerModes.Numeric,
+                         alternatingRowStyle: "alternatingRowStyle",
+                         columns: new[]
+{
+    grid.Column("STT", format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+    grid.Column("TenSan", "Tên sân"),
+    grid.Column("SoLuotDatSan", "Số lượt đặt", canSort: false),
+    grid.Column("DoanhThu", "Doanh thu", canSort: false,format: @<text>
+            @{
+        var doanhThu = item.DoanhThu;
+        if (!DBNull.Value.Equals(doanhThu) && doanhThu is decimal)
+        {
+            var DoanhThu = ((decimal)doanhThu).ToString("#,##0");
+                @(DoanhThu + " vnđ")
+        }
+            }
+    </text>)
+}
+)
+    <div style="display: flex; justify-content: end;">
+        <h5 style=" border-right: 0; ">Tổng doanh thu </h5>
+        <h5 style="width: 294px;">@string.Format("{0:#,##0} vnđ", @ViewBag.tongTien)</h5>
+    </div>
+    </div>
+</div>

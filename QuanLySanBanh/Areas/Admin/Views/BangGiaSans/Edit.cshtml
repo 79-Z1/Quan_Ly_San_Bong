@@ -1,0 +1,109 @@
+﻿@model QuanLySanBanh.Models.BangGiaSan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@*<h2>Edit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>BangGiaSan</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MaGia)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaSan, "MaSan", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MaSan", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaSan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Gio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Gio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Gio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GiaTheoGio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GiaTheoGio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GiaTheoGio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+@using (Html.BeginForm("Edit", "BangGiaSans", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+<style>
+    .group-info {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h5 {
+        margin-top: 5px
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 500px; text-align:center">
+        <h2>Chỉnh sửa bảng giá sân</h2>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 500px;">
+        <div class="group-info">
+            <h5>Mã bảng giá sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.MaGia, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.MaGia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Tên sân</h5>
+            <div style="width: 211px">
+                @Html.DropDownList("MaSan", null, htmlAttributes: new { @class = "form-control" , @style="background-color: #222831" })
+                @Html.ValidationMessageFor(model => model.MaSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Giờ</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.Gio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Gio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Giá theo giờ</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.GiaTheoGio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GiaTheoGio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            @Html.ActionLink("Quay lại danh sách bảng giá sân", "Index", new { }, new { @class = " btn btn-outline-primary" })
+            <input type="submit" value="Lưu" class="btn btn-outline-success" />
+        </div>
+    </div>
+</div>
+    }

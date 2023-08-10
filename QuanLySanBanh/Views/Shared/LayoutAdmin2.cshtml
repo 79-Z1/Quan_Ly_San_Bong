@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Soccer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/aos.css" />
+    <link rel="stylesheet" href="~/Content/styleLayout2.css" />
+    @RenderSection("Styles", false)
+    <style>
+        .ml-auto a:hover, .ml-auto a:active {
+            font-weight: bold !important;
+            color: #ee1e46 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrap">
+        <div class="site-mobile-menu site-navbar-target">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+
+
+        <header class="site-navbar py-4" role="banner">
+
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="site-logo">
+                        <a href="/Admin/Sans/Home">
+                            <img src="~/Images/logo.png" alt="Logo">
+                        </a>
+                    </div>
+                    <div class="ml-auto">
+                        <nav class="site-navigation position-relative text-right" role="navigation">
+                            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                                <li id="logout-btn"><a href="/TaiKhoansUser/Logout" class="nav-link">Đăng Xuất</a></li>
+                            </ul>
+                        </nav>
+                        <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white">
+                            <span class="icon-menu h3 text-white"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+        <footer class="footer-section mt-5">
+            <div class="container">
+                <div class="d-flex flex-column ">
+                    <div style="padding-top: 20px; font-size: x-large;display:flex; flex-direction: column; align-items:center">
+                        <p style="text-transform: uppercase">Hệ thống quản lý sân bóng mini nhân tạo nha trang</p>
+                        <p>Trần Ngọc Tiến - Trương Khánh Hòa - Phạm Ngọc Tuyển - Nguyễn Duy Thiên</p>
+                        <p>Copy right © 2023 Our group 62.CNTT-3 NTU</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Pagescripts/Main.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

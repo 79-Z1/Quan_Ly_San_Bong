@@ -1,0 +1,83 @@
+﻿@model List<System.Data.DataRow>
+    @{
+    ViewBag.Title = "DatSan";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    String today = DateTime.Now.ToString("yyyy-MM-dd");
+    String hour = DateTime.Now.Hour.ToString();
+    }
+    <style>
+        .sancon-container {
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+            a:hover {
+                color: white;
+            }
+    </style>
+
+    <h1>@ViewBag.TB</h1>
+    <section class="container">
+        <form action="" method="get">
+            <div class="d-flex justify-content-center align-items-end">
+                <div class="mb-3 mx-5">
+                    <label class="form-label">Ngày đặt</label>
+                    <input class="form-control" name="ngayDat" type="date" min=@today value=@ViewBag.ngayDat />
+                </div>
+                <div class="mb-3 mx-5">
+                    <label class="form-label">Giờ</label>
+                    <input class="form-control" name="gio" type="number" value=@ViewBag.gio />
+                </div>
+                <button class="btn btn-primary mb-3" style="height: 43px;">
+                    <i style="margin-right: 10px;" class="fas fa-futbol"></i>
+                    Kiểm tra
+                </button>
+            </div>
+        </form>
+        <div class="widget-next-match mb-5">
+            <div class="widget-title text-center" style="font-size: xx-large; font-weight: 600;">Danh sách sân</div>
+            <div class="widget-body mb-3">
+                <a href="/DatSans/BangGia/?maSan=@ViewBag.maSan"><button class="btn btn-outline-primary" style="position: relative; top: 50px; left: 50px; width: 200px;">Xem bảng giá</button></a>
+                <div class="widget-vs d-flex flex-column align-items-center">
+                    @foreach (var row in Model)
+                  {
+                    if((bool)row["tinhTrang"]){
+                    <a href="/DatSans/PhieuDatSan/@ViewBag.maSan?ngayDat=@ViewBag.ngayDat&giobatDau=@ViewBag.gio&viTriSan=@(row["soSan"] as string)&tenSan=@(row["TenSan"] as string)&maCTS=@(row["MaCTS"] as string)"
+                       class="w-50 my-3"
+                       onclick="return false">
+                        <section class="sancon-container" style="background-color: red;">
+                            <h1>@(row["TenSan"] as string)</h1>
+                            <p style="font-size: 20px;">@(row["soSan"] as string)</p>
+                            <p>Đã đặt</p>
+                        </section>
+                    </a>
+
+                    } else {
+                    <a href="/DatSans/PhieuDatSan/@ViewBag.maSan?ngayDat=@ViewBag.ngayDat&giobatDau=@ViewBag.gio&viTriSan=@(row["soSan"] as string)&tenSan=@(row["TenSan"] as string)&maCTS=@(row["MaCTS"] as string)"
+                       class="w-50 my-3">
+                        <section class="sancon-container" style="background-color: green;">
+                            <h1>@(row["tenSan"] as string)</h1>
+                            <p style="font-size: 20px;">@(row["soSan"] as string)</p>
+                            <p>Còn trống</p>
+                        </section>
+                    </a>
+                    }
+                }
+                </div>
+            </div>
+        </div>
+    </section>

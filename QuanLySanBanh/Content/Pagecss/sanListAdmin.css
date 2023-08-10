@@ -1,0 +1,73 @@
+﻿body {
+}
+
+table {
+    color: white !important;
+    font-size: 19px !important;
+    border: 1px solid grey !important;
+}
+
+    table td {
+        background-color: #222831 !important;
+        text-align: center;
+        
+    }
+
+tbody tr {
+    color: white !important;
+}
+
+table thead {
+    text-align: center;
+}
+
+    table thead a {
+        text-decoration: none;
+        color: white;
+    }
+
+#san-list {
+    border: 2px solid grey;
+    height: 688px !important;
+}
+
+h3 {
+    font-size: 30px !important;
+    text-align: center;
+}
+
+.grid-footer td {
+    text-align: center;
+}
+
+.anh-san {
+    height: 50px;
+    width: 100px;
+    background-color: grey;
+}
+
+.grid-footer {
+    color: white;
+    font: 17px Calibri;
+    text-align: center;
+    font-weight: bold;
+}
+
+    .grid-footer a {
+        margin-right: 5px;
+        background-color: #ee1e46;
+        border-radius: 10px;
+        color: white;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        padding: 1px 10px 2px 10px;
+        text-decoration: none;
+    }
+
+        .grid-footer a:active, a:hover {
+            color: #FFAD33;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+
+.table-hover > tbody > tr:hover > * {
+    color: white;
+}

@@ -1,0 +1,218 @@
+﻿@model QuanLySanBanh.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@*<h2>Edit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>TaiKhoan</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MaTK)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenTK, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenTK, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HoTen, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Vip, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Vip)
+                        @Html.ValidationMessageFor(model => model.Vip, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiemTich, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiemTich, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DiemTich, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Quyen, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Quyen)
+                        @Html.ValidationMessageFor(model => model.Quyen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+@using (Html.BeginForm("Edit", "TaiKhoans", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+<style>
+    .group-info {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h5 {
+        margin-top: 10px
+    }
+
+    .checkbox {
+        margin-top: 6px;
+        font-size: larger;
+        font-weight: 400;
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 800px; text-align:center">
+        <h2>Chỉnh sửa tài khoản</h2>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MatKhau)
+<div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 800px;">
+    <div class="row" style="display: flex; margin-top:30px">
+        <div class="col">
+            <div class="group-info">
+                <h5>Mã tài khoản</h5>
+                <div style="width: 211px">
+                    @Html.EditorFor(model => model.MaTK, new { htmlAttributes = new { @class = "form-control", @readonly= "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MaTK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Tên tài khoản</h5>
+                <div style="width: 211px">
+                    @Html.EditorFor(model => model.TenTK, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="group-info">
+                    <h5>Mật khẩu</h5>
+                    <div style="width: 211px">
+                        @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+            <div class="group-info">
+                <h5>Email</h5>
+                <div style="width: 211px">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control"} })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Họ tên</h5>
+                <div style="width: 211px">
+                    @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="group-info">
+                <h5>Số điện thoại</h5>
+                <div style="width: 211px">
+                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Địa chỉ</h5>
+                <div style="width: 211px">
+                    @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Thành viên</h5>
+                <div class="checkbox" style="width: 211px">
+                    Vip @Html.RadioButtonFor(model => model.Vip, "True", new { @checked = "checked" }) &nbsp;
+                    Thường @Html.RadioButtonFor(model => model.Vip, "False")
+                    @Html.ValidationMessageFor(model => model.Vip, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Điểm tích</h5>
+                <div style="width: 211px">
+                    @Html.EditorFor(model => model.DiemTich, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DiemTich, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:flex; justify-content: center">
+        <h5 style="margin-right: 40px">Loại tài khoản</h5>
+        <div class="checkbox" style="width: 211px">
+            Admin @Html.RadioButtonFor(model => model.Quyen, "True", new { @checked = "checked" }) &nbsp;
+            Khách hàng @Html.RadioButtonFor(model => model.Quyen, "False")
+            @Html.ValidationMessageFor(model => model.Quyen, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+        @Html.ActionLink("Quay lại danh sách tài khoản", "Index", new { }, new { @class = " btn btn-outline-primary" })
+        <input type="submit" value="Lưu" class="btn btn-outline-success" />
+    </div>
+</div>
+</div>
+    }

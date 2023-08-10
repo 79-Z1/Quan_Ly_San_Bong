@@ -1,0 +1,129 @@
+﻿@model List<System.Data.DataRow>
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<link href="~/Content/trangChu.css" rel="stylesheet" type="text/css" />
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="3000">
+            <a href="https://www.facebook.com/profile.php?id=100042138145435"><img src="~/Images/banner1.png" class="d-block w-100" alt="banner1"></a>
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+            <a href="https://www.facebook.com/pages/S%C3%A2n-b%C3%B3ng-%C4%91%C3%A1-Kh%C3%A1nh-H%E1%BB%99i/162435914463359"><img src="~/Images/banner2.png" class="d-block w-100" alt="banner2"></a>
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+            <a href="https://www.facebook.com/profile.php?id=100080694258597"><img src="~/Images/banner3.png" class="d-block w-100" alt="banner3"></a>
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+            <a href="https://www.facebook.com/pages/S%C3%A2n-B%C3%B3ng-%C4%90%C3%A1-Anpha-Mai-Xu%C3%A2n-Th%C6%B0%E1%BB%9Fng/324839248228856"><img src="~/Images/banner4.png" class="d-block w-100" alt="banner4"></a>
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+            <a href="https://www.facebook.com/profile.php?id=100080694258597"><img src="~/Images/banner5.png" class="d-block w-100" alt="banner5"></a>
+        </div>
+    </div>
+    <button class=" carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class=" btn-slide carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class=" carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class=" btn-slide carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div id="date-countdown">
+    <span class="countdown-block">
+        <span id="hr" class="label"></span>
+        <span class="sub">hr</span>
+    </span>
+    <span class="countdown-block">
+    <span id="min" class="label"></span> 
+    <span class="sub">min</span> </span>
+    <span class="countdown-block">
+    <span id="sec" class="label"></span> 
+    <span class="sub" >sec</span></span>
+</div>
+<script>
+    function dongHo() {
+        var time = new Date();
+        var hr = time.getHours();
+        var min = time.getMinutes();
+        var sec = time.getSeconds();
+        if (hr < 10)
+            hr = "0" + hr;
+        if (min < 10)
+            min = "0" + min;
+        if (sec < 10)
+            sec = "0" + sec;
+        document.getElementById("hr").innerHTML = hr;
+        document.getElementById("min").innerHTML = min;
+        document.getElementById("sec").innerHTML = sec;
+        setTimeout("dongHo()", 1000);
+    }
+    dongHo();
+</script>
+
+<table class="table">
+    @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongSan)
+            </th>
+            <th></th>
+        </tr>*@
+
+    @foreach (var row in Model)
+    {
+        <div id="san-list" class="widget-next-match">
+            <div class="widget-title">
+                <h3>@(row["TenSan"] as string)</h3>
+            </div>
+            <div class="widget-body mb-3">
+                <div class="widget-vs">
+                    <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
+                        <div class="team-1 text-center">
+                            <img src="~/Images/@(row["AnhSan"] as string)" alt="Image">
+                            <h3><i style="margin-right: 10px;" class="bi bi-geo-alt-fill"></i>@(row["DiaChi"] as string)</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center widget-vs-contents mb-4">
+                <h4 id="so-luong-san">Số lượng sân @(Convert.ToInt32(row["SoLuongSan"]))</h4>
+                <h4>Số lượng sân còn trống @(Convert.ToInt32(row["SoSanConTrong"]))</h4>
+                <p>
+                    <a href="DatSans/DatSan/@(row["MaSan"] as string)" class="btn btn-primary py-3 px-4 mr-3"><i style="margin-right: 10px;" class="fas fa-futbol"></i>Đặt sân ngay</a>
+                </p>
+            </div>
+        </div>
+        @*<tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongSan)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaSan }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaSan }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaSan })
+                </td>
+            </tr>*@
+    }
+
+</table>
+
+

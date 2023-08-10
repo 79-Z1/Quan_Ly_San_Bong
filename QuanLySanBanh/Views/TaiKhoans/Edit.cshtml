@@ -1,0 +1,107 @@
+﻿@model QuanLySanBanh.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    String Vip;
+}
+
+<style>
+    .group-info {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0;
+    }
+
+    h5 {
+        margin-top: 5px
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+        <div style=" background-color: #ee1e46; padding: 16px 84px; color: #fff; width: 500px;">
+            <h2>Chỉnh sửa thông tin</h2>
+        </div>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MaTK)
+<div style=" border: 3px solid rgba(255, 255, 255, 0.1); width: 487px; display: flex; flex-direction: column; padding: 0 30px; width: 500px;">
+        <div class="group-info">
+            <h5>Mã tài khoản</h5>
+            <div>
+                @Html.EditorFor(model => model.MaTK, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+                @Html.ValidationMessageFor(model => model.MaTK, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Tên tài khoản</h5>
+            <div>
+                @Html.EditorFor(model => model.TenTK, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Email</h5>
+            <div>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Họ và tên</h5>
+            <div>
+                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Số điện thoại</h5>
+            <div>
+                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Địa chỉ</h5>
+            <div>
+                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Thành viên:</h5>
+            <div style="width: 225px">
+                @{
+                if(Model.Vip == true)
+                {
+                    Vip = "Vip";
+                }
+                else
+                {
+                    Vip = "Thường";
+                }
+                }
+                <h5 style="word-wrap:break-word">@Vip</h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Điểm tích</h5>
+            <div>
+                <div>
+                    @Html.EditorFor(model => model.DiemTich, new { htmlAttributes = new { @class = "form-control" ,@readonly="readonly"}})
+                    @Html.ValidationMessageFor(model => model.DiemTich, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            @Html.ActionLink("Trở về", "Details", new { id = Model.MaTK },new { @class = "btn btn-outline-primary" })
+            <input type="submit" value="Lưu" class="btn btn-outline-success" />
+        </div>
+    </div>
+    </div>
+}
+<div>
+
+</div>

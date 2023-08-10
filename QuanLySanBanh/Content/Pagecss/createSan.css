@@ -1,0 +1,23 @@
+﻿#san-list {
+    border: 2px solid grey;
+    height: 690px !important;
+}
+
+h3 {
+    font-size: 30px !important;
+    text-align: center;
+}
+#left-form, #right-form{
+    width: 50%;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+input{
+    width: 100px !important;
+    float: left;
+    display: inline-block !important;
+}
+.form-group{
+    text-align:start;
+}

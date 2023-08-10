@@ -1,0 +1,76 @@
+﻿@model QuanLySanBanh.Models.San
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm("Create", "Sans", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+<style>
+    .group-info {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h5 {
+        margin-top: 5px
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 500px; text-align:center">
+        <h2>Thêm sân bóng</h2>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 500px;">
+        <div class="group-info">
+            <h5>Mã sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.MaSan, new { htmlAttributes = new { @class = "form-control" @*,disabled = "disabled", @readonly = "readonly", @Value = ViewBag.MaSan*@ } })
+                @Html.ValidationMessageFor(model => model.MaSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Tên sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.TenSan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Ảnh sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.AnhSan, new { htmlAttributes = new { type = "file", accept = "image/*", @style="white-space: normal; max-width: 100%;" } })
+                @Html.ValidationMessageFor(model => model.AnhSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Địa chỉ</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Số lượng sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.SoLuongSan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SoLuongSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            @Html.ActionLink("Quay lại danh sách sân", "Index", new { }, new { @class = " btn btn-outline-primary" })
+            <input type="submit" value="Thêm" class="btn btn-outline-success" />
+        </div>
+    </div>
+</div>
+    }
+
+
+
+
+
+
+
+

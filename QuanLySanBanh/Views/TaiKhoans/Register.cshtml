@@ -1,0 +1,69 @@
+﻿@model QuanLySanBanh.Models.TaiKhoan
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/Content/dangNhap.css">
+    <title>Đăng ký</title>
+</head>
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                 @using (Html.BeginForm("Register", "TaiKhoans", FormMethod.Post)) // Sửa action và controller ở đây
+                {
+                @Html.AntiForgeryToken()
+
+                <h2>Đăng ký</h2>
+                <div class="inputbox">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                    @Html.TextBoxFor(m => m.TenTK, new { required = "required" })
+                    @Html.LabelFor(m => m.TenTK)
+                    @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    @Html.PasswordFor(m => m.MatKhau, new { required = "required" })
+                    @Html.LabelFor(m => m.MatKhau)
+                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    @Html.TextBoxFor(m => m.Email, new { type = "email", required = "required" })
+                    @Html.LabelFor(m => m.Email)
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="person-outline"></ion-icon>
+                    @Html.TextBoxFor(m => m.HoTen, new { required = "required" })
+                    @Html.LabelFor(m => m.HoTen)
+                    @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="call-outline"></ion-icon>
+                    @Html.TextBoxFor(m => m.SDT, new { type = "number", required = "required" })
+                    @Html.LabelFor(m => m.SDT)
+                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="location-outline"></ion-icon>
+                    @Html.TextBoxFor(m => m.DiaChi, new { required = "required" })
+                    @Html.LabelFor(m => m.DiaChi)
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+                <button type="submit">Đăng ký</button>
+                <div class="register">
+                    <p>Đã có tài khoản <a href="/TaiKhoans/Login">Đăng nhập</a></p>
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

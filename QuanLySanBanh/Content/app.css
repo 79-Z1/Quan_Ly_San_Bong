@@ -1,0 +1,32 @@
+﻿
+* {
+    box-sizing: border-box;
+    font-family: "Times New Roman"
+}
+
+h2, a:hover {
+    color: #0077b6 !important;
+}
+
+.btn {
+    background-color: #0077b6 !important;
+}
+
+.navbar {
+    background-color: cadetblue !important;
+    text-align: center !important;
+    line-height: 49px;
+    color: black;
+    font-size: 30px;
+    justify-content: center !important;
+}
+
+.menu {
+    position: inherit;
+    display: flex !important;
+    color: black;
+    margin: 0 auto;
+    justify-content: center;
+    font-weight: 600;
+    flex-direction: row !important;
+}

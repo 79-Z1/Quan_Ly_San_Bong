@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb0dd1edad5149d69b856475eb92f771" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLySanBongModel.BangGiaSan" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLySanBongModel.ChiTietSan" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLySanBongModel.DatSan" Width="1.5" PointX="8" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLySanBongModel.San" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLySanBongModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLySanBongModel.TaiKhoan" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="QuanLySanBongModel.bsg_san_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLySanBongModel.cts_san_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLySanBongModel.ds_tk_fk" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

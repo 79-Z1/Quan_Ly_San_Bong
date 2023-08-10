@@ -1,0 +1,106 @@
+﻿@*@model QuanLySanBanh.Models.RegisterViewModel
+    @{
+        ViewBag.Title = "Register";
+    }
+
+    <h2>@ViewBag.Title.</h2>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+*@
+
+@model QuanLySanBanh.Models.TaiKhoan
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/Content/dangNhap.css">
+    <title>Đăng ký</title>
+</head>
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post)) // Sửa action và controller ở đây
+                {
+                    @Html.AntiForgeryToken()
+
+                    <h2>Đăng ký</h2>
+                    <div class="inputbox">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        @Html.TextBoxFor(m => m.TenTK, new { required = "required" })
+                        @Html.LabelFor(m => m.TenTK)
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        @Html.PasswordFor(m => m.MatKhau, new { required = "required" })
+                        @Html.LabelFor(m => m.MatKhau)
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        @Html.TextBoxFor(m => m.Email, new { type = "email", required = "required" })
+                        @Html.LabelFor(m => m.Email)
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="person-outline"></ion-icon>
+                        @Html.TextBoxFor(m => m.HoTen, new { required = "required" })
+                        @Html.LabelFor(m => m.HoTen)
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="call-outline"></ion-icon>
+                        @Html.TextBoxFor(m => m.SDT, new { type = "number", required = "required" })
+                        @Html.LabelFor(m => m.SDT)
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="location-outline"></ion-icon>
+                        @Html.TextBoxFor(m => m.DiaChi, new { required = "required" })
+                        @Html.LabelFor(m => m.DiaChi)
+                    </div>
+                    <button type="submit">Đăng ký</button>
+                    <div class="register">
+                        <p>Đã có tài khoản <a href="/TaiKhoans/Login">Đăng nhập</a></p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

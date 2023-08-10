@@ -1,0 +1,210 @@
+﻿@model QuanLySanBanh.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@*<h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>TaiKhoan</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenTK)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenTK)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MatKhau)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoTen)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SDT)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SDT)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Vip)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Vip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiemTich)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiemTich)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Quyen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Quyen)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>*@
+@using (Html.BeginForm("Delete", "TaiKhoans", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+<style>
+    .group-info {
+        margin: 25px 0;
+        display: flex;
+        justify-content: space-between;
+        height: 70px;
+    }
+
+    h5 {
+        margin-top: 10px
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <h3 style="color: red">Bạn có muốn xóa tài khoản này không?</h3>
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 800px; text-align:center">
+        <h2>Xóa tài khoản</h2>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 800px;">
+    <div class="row" style="display: flex">
+        <div class="col" style="border-right:white solid 1px">
+            <div class="group-info">
+                <h5>Mã tài khoản</h5>
+                <div style="width: 211px">
+                    <h5 style="word-wrap:break-word">@Model.MaTK</h5>
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Tên tài khoản</h5>
+                <div style="width: 211px">
+                    <h5 style="word-wrap:break-word">@Model.TenTK</h5>
+                </div>
+            </div>
+            @*<div class="group-info">
+                    <h5>Mật khẩu</h5>
+                    <div style="width: 211px">
+                        <h5 style="word-wrap:break-word">@Model.MatKhau</h5>
+                    </div>
+                </div>*@
+            <div class="group-info">
+                <h5>Email</h5>
+                <div style="width: 211px">
+                    <h5 style="word-wrap:break-word">@Model.Email</h5>
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Họ tên</h5>
+                <div style="width: 211px">
+                    <h5 style="word-wrap:break-word">@Model.HoTen</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="group-info">
+                <h5>Số điện thoại</h5>
+                <div style="width: 211px">
+                    <h5 style="word-wrap:break-word">@Model.SDT</h5>
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Địa chỉ</h5>
+                <div style="width: 211px">
+                    <h5 style="word-wrap:break-word">@Model.DiaChi</h5>
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Thành viên</h5>
+                <div style="width: 211px">
+                    @{
+                            if(Model.Vip == true)
+                            {
+                        <h5 style="word-wrap:break-word">Vip</h5>
+                            }
+                            else
+                            {
+                        <h5 style="word-wrap:break-word">Thường</h5>
+                            }
+                    }
+                </div>
+            </div>
+            <div class="group-info">
+                <h5>Điểm tích</h5>
+                <div style="width: 211px">
+                    <h5 style="word-wrap:break-word">@Model.DiemTich</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:flex; justify-content: center">
+        <h5 style="margin-left:50px">Loại tài khoản</h5>
+        <div style="width: 211px">
+            @{
+                            if(Model.Quyen == true)
+                            {
+                <h5 style="word-wrap: break-word; margin-left: 30px;">Admin</h5>
+                            }
+                            else
+                            {
+                <h5 style="word-wrap: break-word; margin-left: 30px;">Khách hàng</h5>
+                            }
+            }
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+        @Html.ActionLink("Quay lại danh sách tài khoản", "Index", new { }, new { @class = " btn btn-outline-primary" })
+        <input type="submit" value="Xóa" class="btn btn-outline-danger" />
+    </div>
+</div>
+</div>
+    }

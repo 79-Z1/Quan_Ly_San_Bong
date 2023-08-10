@@ -1,0 +1,131 @@
+﻿@model List<System.Data.DataRow>
+@{
+    ViewBag.Title = "LichSu";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/Content/lichSu.css" />
+}
+@helper checkTinhTrang(DateTime ngay, int gio)
+{
+    var currentDate = DateTime.Now.Date;
+    var currentHour = DateTime.Now.ToString("HH");
+    var isNgayLonHonHoacBangHienTai = ngay >= currentDate;
+
+    if (isNgayLonHonHoacBangHienTai)
+    {
+    <div class="d-flex">
+        <p class="me-3">Tình trạng</p>
+        <p style="color: green">Đang đặt</p>
+    </div>
+    }
+    else if (isNgayLonHonHoacBangHienTai && gio >= Convert.ToInt32(currentHour))
+    {
+    <div class="d-flex">
+        <p class="me-3">Tình trạng</p>
+        <p style="color: red">Đang đặt</p>
+    </div>
+    }
+    else if (isNgayLonHonHoacBangHienTai && gio < Convert.ToInt32(currentHour))
+    {
+    <div class="d-flex">
+        <p class="me-3">Tình trạng</p>
+        <p style="color: red">Đã xong</p>
+    </div>
+    }
+    else
+    {
+    <div class="d-flex">
+        <p class="me-3">Tình trạng</p>
+        <p style="color: red">Đã xong</p>
+    </div>
+    }
+    }
+    <h1>@ViewBag.TB</h1>
+    <div class="container">
+    @foreach (var row in Model)
+    {
+    <div class="widget-next-match mb-5">
+        <div class="widget-title text-center">
+            <h2 style="font-weight: 700">@(row["TenSan"] as string)</h2>
+        </div>
+        <div class="widget-body mb-3">
+            <div class="widget-vs">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="~/Images/@(row["AnhSan"] as string)" alt="Image">
+                    </div>
+                    <div class="col-6 px-5" style="font-size: 20px">
+                        @checkTinhTrang((DateTime)row["NgayDenSan"], ((int)row["GioKetThuc"]))
+                        <div class="d-flex">
+                            <p class="me-3">Vị trí sân</p>
+                            <p>@(row["ViTriSan"] as string)</p>
+                        </div>
+                        <div class="d-flex">
+                            <p class="me-3">Khung giờ</p>
+                            <p>@((int)row["GioBatDau"]):00 - @((int)row["GioKetThuc"]):00</p>
+                        </div>
+                        <div class="d-flex">
+                            <p class="me-3">Thành tiền</p>
+                            <p>@string.Format("{0:N0}", Convert.ToDecimal(row["ThanhTien"])) VNĐ</p>
+                        </div>
+
+                        <div class="d-flex">
+                            <p class="me-3">Ngày đặt</p>
+                            <p>@(((DateTime)row["NgayDenSan"]).ToString("yyyy-MM-dd"))</p>
+                        </div>
+
+                    </div>
+                    @{
+                        var currentDate = DateTime.Now.Date;
+                        var currentHour = DateTime.Now.ToString("HH");
+                        var isNgayLonHonHoacBangHienTai = ((DateTime)row["NgayDenSan"]) >= currentDate;
+
+                        if (isNgayLonHonHoacBangHienTai)
+                        {
+                            <div class="col-2 d-flex flex-column justify-content-center">
+                                <a href="/DatSans/Details/@(row["MaDS"] as string)?viTriSan=@(row["ViTriSan"] as string)&tenSan=@(row["TenSan"] as string)">
+                                    <button class="btn btn btn-outline-info mb-3 py-3 px-2 me-3 btn-page-lichSu">Xem phiếu đặt</button>
+                                </a>
+                                <a href="/DatSans/Delete/@(row["MaDS"] as string)?viTriSan=@(row["ViTriSan"] as string)&tenSan=@(row["TenSan"] as string)">
+                                    <button class="btn btn-outline-danger py-3 px-4 btn-page-lichSu">Hủy sân</button>
+                                </a>
+                            </div>
+                        } 
+                        else if (isNgayLonHonHoacBangHienTai && ((int)row["GioKetThuc"]) >= Convert.ToInt32(currentHour))
+                        {
+                            <div class="col-2 d-flex flex-column justify-content-center">
+                                <a href="/DatSans/Details/@(row["MaDS"] as string)?viTriSan=@(row["ViTriSan"] as string)&tenSan=@(row["TenSan"] as string)">
+                                    <button class="btn btn btn-outline-info mb-3 py-3 px-2 me-3 btn-page-lichSu">Xem phiếu đặt</button>
+                                </a>
+                                <a href="/DatSans/Delete/@(row["MaDS"] as string)?viTriSan=@(row["ViTriSan"] as string)&tenSan=@(row["TenSan"] as string)">
+                                    <button class="btn btn-outline-danger py-3 px-4 btn-page-lichSu">Hủy sân</button>
+                                </a>
+                            </div>
+                        }
+                        else if (isNgayLonHonHoacBangHienTai && ((int)row["GioKetThuc"]) < Convert.ToInt32(currentHour))
+                        {
+                            <div class="col-2 d-flex flex-column justify-content-center">
+                                <button class="btn btn-outline-secondary mb-3 py-3 px-4 me-3 btn-page-lichSu">Đặt lại</button>
+                                <form method="post" action="/DatSans/Delete/@(row["MaDS"] as string)">
+                                    <button type="submit" class="btn btn-outline-danger py-3 px-4 btn-page-lichSu">Xóa</button>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-2 d-flex flex-column justify-content-center">
+                                <button class="btn btn-outline-secondary mb-3 py-3 px-4 me-3 btn-page-lichSu">Đặt lại</button>
+                                <form method="post" action="/DatSans/Delete/@(row["MaDS"] as string)">
+                                    <button type="submit" class="btn btn-outline-danger py-3 px-4 btn-page-lichSu">Xóa</button>
+                                </form>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    </div>

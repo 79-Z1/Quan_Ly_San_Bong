@@ -1,0 +1,74 @@
+﻿@model QuanLySanBanh.Models.DatSan
+@{
+    ViewBag.Title = "PhieuDatSan";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@section Scripts
+{
+    <script src="~/Scripts/Pagescripts/script_PDS.js"></script>
+}
+
+<style>
+    .group-info {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <p id="maSan" style="display:none">@ViewBag.maSan</p>
+    <p id="maCTS" style="display:none">@ViewBag.maCTS</p>
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 500px;">
+        <h2 class="text-center">Phiếu đặt sân</h2>
+    </div>
+    <div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 500px;">
+        <div class="group-info">
+            <h5>Ngày đặt:</h5>
+            <div style="width: 225px">
+                <h5 id="ngayDat" style="word-wrap:break-word">@ViewBag.ngayDat</h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Giờ bắt đầu: </h5>
+            <div style="width: 225px">
+                <h5 id="gioBatDau" style="word-break:break-word">@ViewBag.gioBatDau:00</h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Số giờ đặt </h5>
+            <div style="width: 225px">
+                <input id="gioDat" onKeyDown="return false" class="form-control text-box single-line w-100" 
+                       type="number" value="1" min="1" max="24"
+                />
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Giờ kết thúc:  </h5>
+            <div style="width: 225px">
+                <h5  id="gioKetThuc" style="word-wrap:break-word"></h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Tên sân: </h5>
+            <div style="width: 225px">
+                <h5  id="tenSan" style="word-wrap:break-word">@ViewBag.tenSan</h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Vị trí sân:</h5>
+            <div style="width: 225px">
+                <h5 style="word-wrap:break-word">@ViewBag.viTriSan</h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Thành tiền:</h5>
+            <div style="width: 225px">
+                <h5 id="thanhTien" style="word-wrap:break-word">@ViewBag.tongTien</h5>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <input type="button" id="datSan-btn" value="Đặt sân" class="btn btn-outline-danger py-3 px-4 mr-3" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,145 @@
+﻿@model QuanLySanBanh.Models.San
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+                    $(function ()
+                    {
+                        var fileupload = $("#Avatar");
+                        var image = $("#FileUpload");
+                        image.click(function ()
+                        {
+                            fileupload.click();
+                        });
+                        fileupload.change(function ()
+                        {
+                            var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
+                            document.getElementById("AnhSan").value=fileName;
+                        });
+                    });
+</script>
+}
+
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+@*<div class="form-horizontal">
+            <h4>San</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MaSan)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenSan, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenSan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenSan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SoLuongSan, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SoLuongSan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SoLuongSan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AnhSan, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AnhSan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AnhSan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+<style>
+    .group-info {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h5 {
+        margin-top: 5px
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 500px; text-align:center">
+        <h2>Chỉnh sửa sân bóng</h2>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 500px;">
+        <div class="group-info">
+            <h5>Mã sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.MaSan, new { htmlAttributes = new { @class = "form-control",@readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MaSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Tên sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.TenSan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="group-info">
+                <h5>Ảnh sân</h5>
+                <div style="width: 211px">
+                    <input type="file" name="Avatar" id="Avatar" style="white-space: normal; max-width: 100%;" />
+                    @Html.ValidationMessageFor(model => model.AnhSan, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="group-info">
+            <h5>Ảnh sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.AnhSan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AnhSan, "", new { @class = "text-danger" })
+                <input style="margin-top: 10px; white-space: normal; max-width: 100%; " type="file" name="Avatar" id="Avatar" />
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Địa chỉ</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Số lượng sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.SoLuongSan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SoLuongSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            @Html.ActionLink("Quay lại danh sách sân", "Index", new { }, new { @class = "btn btn-outline-primary" })
+            <input type="submit" value="Lưu" class="btn btn-outline-danger" />
+        </div>
+    </div>
+</div>
+}

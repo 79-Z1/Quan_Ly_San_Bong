@@ -1,0 +1,35 @@
+﻿.card {
+    color: black !important;
+}
+
+
+.card-title {
+    color: black;
+}
+
+.widget-next-match {
+    border: 3px solid #808080;
+    border-top: none;
+}
+
+.widget-title {
+    /* padding: 16px 20px; */
+    color: #fff;
+    background-color: #ee1e46;
+}
+
+p {
+    color: white;
+    font-size: 20px !important;
+}
+
+.widget-vs img {
+    width: 100% !important;
+    max-width: 100% !important;
+    object-fit: scale-down;
+}
+
+.btn-page-lichSu {
+    text-align: center;
+    width: 130px !important;
+}

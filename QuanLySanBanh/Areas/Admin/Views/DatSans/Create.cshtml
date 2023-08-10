@@ -1,0 +1,145 @@
+﻿@model QuanLySanBanh.Models.DatSan
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@*<h2>Create</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>DatSan</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaDS, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MaDS, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MaDS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaCTS, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MaCTS, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MaCTS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaTK, "MaTK", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MaTK", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaTK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayDenSan, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NgayDenSan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NgayDenSan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GioBatDau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GioBatDau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GioBatDau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GioKetThuc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GioKetThuc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GioKetThuc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+@using (Html.BeginForm("Create", "DatSans", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+<style>
+    .group-info {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h5 {
+        margin-top: 5px
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 500px; text-align:center">
+        <h2>Thêm đặt sân</h2>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 500px;">
+        <div class="group-info">
+            <h5>Mã đặt sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.MaDS, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = ViewBag.MaDS } })
+                @Html.ValidationMessageFor(model => model.MaDS, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Vị trí sân</h5>
+            <div style="width: 211px">
+                @Html.DropDownList("MaCTS", null, htmlAttributes: new { @class = "form-control" , @style="background-color: #222831" })
+                @Html.ValidationMessageFor(model => model.MaCTS, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Tên tài khoản</h5>
+            <div style="width: 211px">
+                @Html.DropDownList("MaTK", null, htmlAttributes: new { @class = "form-control" , @style="background-color: #222831" })
+                @Html.ValidationMessageFor(model => model.MaTK, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Ngày đến sân</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.NgayDenSan, new { htmlAttributes = new { @class = "form-control", @type = "date", style="color-scheme: dark;" } })
+                @Html.ValidationMessageFor(model => model.NgayDenSan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Giờ bắt đầu</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.GioBatDau, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GioBatDau, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Giờ kết thúc</h5>
+            <div style="width: 211px">
+                @Html.EditorFor(model => model.GioKetThuc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GioKetThuc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            @Html.ActionLink("Quay lại danh sách đặt sân", "Index", new { }, new { @class = " btn btn-outline-primary" })
+            <input type="submit" value="Thêm" class="btn btn-outline-success" />
+        </div>
+    </div>
+</div>
+    }

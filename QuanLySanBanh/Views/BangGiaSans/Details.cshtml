@@ -1,0 +1,43 @@
+﻿@model QuanLySanBanh.Models.BangGiaSan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BangGiaSan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Gio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTheoGio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTheoGio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.San.TenSan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.San.TenSan)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaGia }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

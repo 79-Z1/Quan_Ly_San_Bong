@@ -1,0 +1,96 @@
+﻿@model QuanLySanBanh.Models.San
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+@*<h2>Details</h2>
+
+    <div>
+        <h4>San</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenSan)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenSan)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SoLuongSan)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoLuongSan)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AnhSan)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AnhSan)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MaSan }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+<style>
+    .group-info {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div style=" background-color: #ee1e46; padding: 16px 88px; color: #fff; width: 500px;">
+        <h2>Thông tin sân bóng</h2>
+    </div>
+    <div style="padding: 0 30px; border: 3px solid rgba(255, 255, 255, 0.1); width: 500px;">
+        <div style="margin-top: 30px;">
+            <img src="~/Images/@Model.AnhSan"
+                 style="width: 100%; height: 100%;" alt="Avatar" />
+        </div>
+        <div class="group-info">
+            <h5>Mã sân:</h5>
+            <div style="width: 211px">
+                <h5 style="word-wrap:break-word">@Model.MaSan</h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Tên sân:</h5>
+            <div style="width: 211px">
+                <h5 style="word-wrap:break-word">@Model.TenSan</h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Địa chỉ: </h5>
+            <div style="width: 211px">
+                <h5 style="word-break:break-word">@Model.DiaChi</h5>
+            </div>
+        </div>
+        <div class="group-info">
+            <h5>Số lượng sân: </h5>
+            <div style="width: 211px">
+                <h5 style="word-wrap:break-word">@Model.SoLuongSan</h5>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            @Html.ActionLink("Quay lại danh sách sân", "Index",new {}, new { @class = "btn btn-outline-primary" })
+            @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaSan }, new{@class = "btn btn-outline-danger"})
+        </div>
+    </div>
+</div>
